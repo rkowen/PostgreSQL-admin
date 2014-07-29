@@ -1,0 +1,25 @@
+Patch is due to Massimiliano Ferrero of Torino, Italy
+But doesn't work for this version.
+
+*** /usr/share/phppgadmin/libraries/lib.inc.php    Sun Jun  6 08:42:07 2004
+--- usr/share/phppgadmin/libraries/lib.inc.php    Sun Sep 26 11:03:46 2004
+***************
+*** 106,111 ****
+--- 106,120 ----
+          $_SESSION['webdbLanguage'] = $_POST['formLanguage'];
+      }
+ 
++     // If automatic login is set, then set session variables
++     if (isset($autoLogin) && $autoLogin && isset($formServer) && isset($formUsername) &&
++         isset($formPassword) && isset($formLanguage)) {
++         $_SESSION['webdbServerID'] = $formServer;
++         $_SESSION['webdbUsername'] = $formUsername;
++         $_SESSION['webdbPassword'] = $formPassword;
++         $_SESSION['webdbLanguage'] = $formLanguage;
++     }
++
+      // If the logged in settings aren't present, put up the login screen.
+      if (!isset($_SESSION['webdbUsername'])
+              ||    !isset($_SESSION['webdbPassword'])
+
+-- 
